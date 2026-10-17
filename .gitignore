@@ -1,0 +1,41 @@
+# secrets and local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# runtime data (datasets, models, databases)
+var/
+backend/var/
+*.db
+*.sqlite
+*.sqlite3
+*.joblib
+models/*
+!models/.gitkeep
+dumps/
+*.sql.gz
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+
+# node
+node_modules/
+frontend/dist/
+*.log
+
+# native build output
+services/cpp-accelerator/build/
+
+# os / editor
+.DS_Store
+.idea/
+.vscode/

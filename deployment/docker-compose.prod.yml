@@ -1,0 +1,25 @@
+# Production overrides. Usage:
+#   docker compose -f deployment/docker-compose.yml -f deployment/docker-compose.prod.yml --env-file .env up -d
+# Tokens are mandatory; the API refuses to start without them. Put TLS termination (reverse proxy / load balancer) in front.
+services:
+  backend:
+    environment:
+      NEXUS_ENV: production
+      NEXUS_API_TOKEN_HASHES: ${NEXUS_API_TOKEN_HASHES:?set NEXUS_API_TOKEN_HASHES}
+      NEXUS_ADMIN_TOKEN_HASHES: ${NEXUS_ADMIN_TOKEN_HASHES:?set NEXUS_ADMIN_TOKEN_HASHES}
+      NEXUS_CORS_ORIGINS: ${NEXUS_CORS_ORIGINS:?set NEXUS_CORS_ORIGINS to your site origin}
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+  frontend:
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
