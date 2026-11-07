@@ -39,7 +39,7 @@ def _looks_like_datetime(values: pd.Series) -> bool:
 
 def infer_kind(s: pd.Series) -> str:
     """One of: numeric, numeric_like, categorical, boolean, datetime, identifier, text, constant, empty."""
-    n = len(s)
+    
     values = s.dropna()
     nn = len(values)
     if nn == 0:
